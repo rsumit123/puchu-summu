@@ -1,38 +1,35 @@
-/* 1) Fullscreen parent: centers the heart on larger screens */
+/* 1) Parent container: For desktop, use 80vh; for mobile, less height. */
 .header {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 80vh;  /* desktop height */
   margin: 0;
   padding: 0;
   overflow: hidden;
 }
 
-/* 2) Heart container:
-   - Uses 90vw (capped at 600px) and maintains a square aspect ratio.
+/* 2) Heart container: 
+   - Uses 90vw (capped at 800px now for a larger heart on desktop)
+   - Maintains a square aspect ratio.
    - Has a beating animation.
 */
 #heart {
   position: relative;
-  width: 90vw;         /* fills most of the viewport width */
-  max-width: 600px;    /* caps the width on larger screens */
-  aspect-ratio: 1/1;   /* forces a square shape */
+  width: 90vw;
+  max-width: 800px;
+  aspect-ratio: 1/1;
   animation: beat 1.5s ease-in-out infinite;
 }
 
 /* Beating animation */
 @keyframes beat {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.08);
-  }
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
 }
 
-/* 3) The SVG that draws the red heart background.
-   It fills the entire heart container.
+/* 3) The SVG heart background occupies the entire container.
+   (Fill is transparent so that the background image is visible.)
 */
 .heart-svg {
   position: absolute;
@@ -44,8 +41,9 @@
 }
 
 /* 4) Photo container:
-   - Absolutely positioned to fill the heart.
-   - Clipped using the same clipPath.
+   - Fills the heart container.
+   - Uses the same clipPath so that its content is clipped to the heart shape.
+   - Now has a background image that covers the entire container.
 */
 .photo-container {
   position: absolute;
@@ -60,11 +58,30 @@
   justify-content: center;
   align-items: center;
   pointer-events: none;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-/* 5) Photo item:
-   - Nearly fills the container with a 5px margin (for a visible red border).
-   - Uses a dropIn animation when a new photo appears.
+/* 5) Loading message: centered while the image loads */
+.loading-message {
+  position: absolute;
+  z-index: 3;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+}
+
+/* 6) Photo item:
+   - Fills nearly the entire container with a 5px margin for a visible border.
+   - Animates in with a dropIn effect.
 */
 .photo-item {
   width: calc(100% - 10px);
@@ -90,42 +107,41 @@
   }
 }
 
-/* 6) The image inside the photo item:
-   - Fills the container using object-fit: cover.
-   - Is centered by default.
+/* 7) The actual image:
+   - Uses object-fit: contain so the entire image is visible.
+   - With the container background (using cover), the heart is fully filled.
 */
 .photo-item img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: 50% 50%;
   border: 2px solid white;
   border-radius: 4px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Hover effect (desktop) */
+/* Hover effect on desktop */
 .photo-item:hover img {
   transform: scale(1.15);
   z-index: 3;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
 }
 
-/* 7) Responsive tweaks for smaller screens:
-   - Adjust header alignment and heart container size to reduce excessive gap.
-   - Reduce header height to 70vh to avoid taking up too much vertical space on mobile.
+/* 8) Responsive tweaks for smaller screens:
+   - On screens 500px wide or less, reduce the header height to 60vh.
 */
 @media (max-width: 500px) {
   .header {
-    height: 70vh;          /* reduced from 100vh */
-    align-items: flex-start; /* align to top */
-    padding-top: 10px;       /* add a small top padding */
+    height: 60vh;
+    align-items: flex-start;
+    padding-top: 10px;
   }
   
   #heart {
     width: 90vw;
-    height: 90vw;            /* force a larger square to fill more width and reduce extra vertical gap */
+    height: 90vw;
     max-width: none;
   }
 }

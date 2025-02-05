@@ -6,7 +6,7 @@ const moments = [
     id: 1,
     title: 'Puducherry Trip',
     description: 'Our first college Trip together....!!',
-    image: 'https://sumits-private-storage.s3.us-east-1.amazonaws.com/puchu-photos/pudu_trip_cropped.jpg'
+    image: 'https://sumits-private-storage.s3.us-east-1.amazonaws.com/puchu-photos/pudu_2.jpg'
   },
   {
     id: 2,
