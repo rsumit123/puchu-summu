@@ -32,4 +32,16 @@
     40% { transform: translateY(10px); }
     60% { transform: translateY(5px); }
   }
+
+  @media (max-width: 500px) {
+    .scroll-arrow {
+        position: absolute;
+        bottom: 200px; /* Distance from the bottom of the parent section */
+        left: 50%;
+        transform: translateX(-50%);
+        cursor: pointer;
+        z-index: 10;
+      }
+  }
+  
   
