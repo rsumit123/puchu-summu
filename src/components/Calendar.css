@@ -1,0 +1,88 @@
+.calendar-container {
+    padding: 40px 20px;
+    background: #fff0f0; /* Soft pink background */
+    border-radius: 10px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .calendar-container h2 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #d35400; /* Warm accent color */
+  }
+  
+  .timeline {
+    position: relative;
+    margin: 20px 0;
+    padding-left: 60px; /* Added padding to ensure content doesn't overlap the icon */
+  }
+  
+  /* The vertical line running through the timeline */
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 30px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: #d35400;
+  }
+  
+  .timeline-item {
+    position: relative;
+    margin-bottom: 30px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s forwards;
+  }
+  
+  .timeline-icon {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #d35400;
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 50px;
+    font-size: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .timeline-content {
+    padding: 10px 15px;
+    border-radius: 8px;
+    background: #ffe4e1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    margin-left: 70px; /* Extra margin so the content doesn't overlap the icon */
+  }
+  
+  .timeline-content h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #d35400;
+  }
+  
+  .timeline-content p {
+    margin: 5px 0 0;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  

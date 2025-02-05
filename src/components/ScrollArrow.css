@@ -1,0 +1,35 @@
+.scroll-arrow {
+    position: absolute;
+    bottom: 100px; /* Distance from the bottom of the parent section */
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    z-index: 10;
+  }
+  
+  .arrow {
+    display: inline-block;
+    font-size: 3rem; /* Larger font size for better visibility */
+    color: #fff;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff;
+    /* Two animations: one for a glowing effect and one for a bounce */
+    animation: glow 1.5s infinite alternate, bounce 1s infinite;
+  }
+  
+  /* Glow animation for the arrow */
+  @keyframes glow {
+    from {
+      text-shadow: 0 0 5px #fff, 0 0 10px #fff;
+    }
+    to {
+      text-shadow: 0 0 20px #fff, 0 0 30px #fff;
+    }
+  }
+  
+  /* Bounce animation */
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(10px); }
+    60% { transform: translateY(5px); }
+  }
+  

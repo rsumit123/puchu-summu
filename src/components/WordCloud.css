@@ -1,0 +1,17 @@
+.word-cloud {
+    padding: 40px 20px;
+    text-align: center;
+  }
+  
+  .word-cloud h2 {
+    margin-bottom: 20px;
+    color: #d35400; /* A warm tone that fits the love theme */
+  }
+  
+  .word-cloud-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  

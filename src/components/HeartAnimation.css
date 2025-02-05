@@ -1,0 +1,65 @@
+/* Container for falling items (emojis). 
+   Covers the entire viewport, pointer-events: none so it doesn’t block clicks.
+*/
+.heart-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+/* Each "heart" or "emoji" has absolute positioning and uses an animation named "fall". */
+.heart {
+  position: absolute;
+  top: -70px; /* start above the visible top */
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  opacity: 0.9;
+}
+
+/* Keyframes for falling from top to bottom, rotating along the way. */
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* 
+  We also define a special "falling-text-banner" for the matched event text 
+  if it exists. We animate it with the same or a similar "fall" keyframes 
+  so it floats down the screen.
+*/
+.falling-text-banner {
+  position: fixed;
+  top: -70px;       /* start above the top edge */
+  left: 50%;
+  transform: translateX(-50%); /* center horizontally */
+
+  /* We use the same 'fall' keyframes, or we can define a unique variant. 
+     Here we just reuse it for simplicity. 
+     We set a consistent duration so it doesn't vanish too quickly. */
+  animation-name: fall;
+  animation-duration: 6s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+
+  font-size: 2rem;
+  font-weight: bold;
+  color: #e60073;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+  pointer-events: none;
+  z-index: 99999; /* above everything else */
+}
