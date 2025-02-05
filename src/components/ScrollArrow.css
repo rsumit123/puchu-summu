@@ -1,6 +1,6 @@
 .scroll-arrow {
     position: absolute;
-    bottom: 100px; /* Distance from the bottom of the parent section */
+    bottom: 20px; /* Distance from the bottom of the parent section */
     left: 50%;
     transform: translateX(-50%);
     cursor: pointer;
