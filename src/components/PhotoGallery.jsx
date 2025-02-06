@@ -3,14 +3,14 @@ import './PhotoGallery.css';
 
 const PhotoGallery = () => {
   const pool = [
-    'https://sumits-private-storage.s3.us-east-1.amazonaws.com/puchu-photos/puju_test_1.jpg',
-    'https://sumits-private-storage.s3.us-east-1.amazonaws.com/puchu-photos/puju8.jpg',
-    // 'https://sumits-private-storage.s3.us-east-1.amazonaws.com/puchu-photos/puju9.jpg',
-    'https://sumits-private-storage.s3.us-east-1.amazonaws.com/puchu-photos/puju10.jpg',
-    // 'https://sumits-private-storage.s3.us-east-1.amazonaws.com/puchu-photos/puju5.jpg',
-    // 'https://sumits-private-storage.s3.us-east-1.amazonaws.com/puchu-photos/puju6.jpg',
-    'https://sumits-private-storage.s3.us-east-1.amazonaws.com/puchu-photos/photo7.jpg',
-    // 'https://sumits-private-storage.s3.us-east-1.amazonaws.com/puchu-photos/photo8.jpg'
+    '/images/puju_test_1.jpg',
+    '/images/puju10.jpg',
+    '/images/puju8.jpg',
+    // '/images/puju4.jpg',
+    // '/images/puju5.jpg',
+    // '/images/puju6.jpg',
+    '/images/photo7.jpg',
+    // '/images/photo8.jpg'
   ];
 
   // Utility to pick a new photo that's not the current one.
@@ -25,7 +25,7 @@ const PhotoGallery = () => {
   const [photoKey, setPhotoKey] = useState(Date.now());
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  // Reset loading state when the photo key changes.
+  // Reset imageLoaded state whenever photoKey changes.
   useEffect(() => {
     setImageLoaded(false);
   }, [photoKey]);
@@ -34,7 +34,7 @@ const PhotoGallery = () => {
     const interval = setInterval(() => {
       const newPhoto = getRandomPhoto(photo);
       setPhoto(newPhoto);
-      setPhotoKey(Date.now());
+      setPhotoKey(Date.now()); // triggers dropIn animation and resets loaded state
     }, 5000);
     return () => clearInterval(interval);
   }, [photo]);
@@ -43,10 +43,11 @@ const PhotoGallery = () => {
     <header className="header">
       <div id="heart">
         {/*
-          The SVG uses a path (in objectBoundingBox coordinates) that produces
-          a thicker heart. The same path is used for both the clipPath (which will clip
-          the content of .photo-container) and for the SVG background.
-          Here we set the fill to "transparent" so that our container’s background takes over.
+          This SVG uses a path defined in 0..1 coordinates (objectBoundingBox).
+          The updated path produces a thicker heart:
+            - The top point has been moved down.
+            - The control points have been expanded so that the lobes are wider.
+          The same path is used for both the red fill and the clipPath.
         */}
         <svg className="heart-svg" viewBox="0 0 1 1" preserveAspectRatio="none">
           <defs>
@@ -66,14 +67,16 @@ const PhotoGallery = () => {
               C 1.0,0.70,    1.0,0.00,   0.5,0.35
               Z
             "
-            fill="transparent"
+            fill="red"
           />
         </svg>
 
         {/*
-          The photo container now uses a background image set to the same photo.
-          With background-size: cover, the entire heart is always filled.
-          Then we overlay the actual <img> (with object-fit: contain) so that the entire photo is visible.
+          The photo container uses the same clipPath so the image always fits
+          perfectly inside the red heart shape.
+          It also uses the current photo as a background image (with cover)
+          so that any extra space (due to using object-fit: contain on the <img>)
+          is filled with the photo.
         */}
         <div
           className="photo-container"

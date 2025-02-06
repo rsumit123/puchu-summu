@@ -1,24 +1,30 @@
-/* 1) Parent container: For desktop, use 80vh; for mobile, less height. */
+/* 1) Header container:
+   - For desktop, we use a fixed height of 80vh with a bottom margin
+     to separate from the next section.
+   - The header is centered horizontally.
+*/
 .header {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 80vh;  /* desktop height */
-  margin: 0;
+  height: 80vh;
+  margin: 0 0 10vh 0;
   padding: 0;
   overflow: hidden;
 }
 
-/* 2) Heart container: 
-   - Uses 90vw (capped at 800px now for a larger heart on desktop)
+/* 2) Heart container:
+   - Its size is now constrained to the smaller of 90vw or 80vh,
+     so it never exceeds the header’s height.
+   - max-width is set to 800px on desktop, but the width is limited by min(90vw, 80vh).
    - Maintains a square aspect ratio.
-   - Has a beating animation.
+   - Has the beating animation.
 */
 #heart {
   position: relative;
-  width: 90vw;
+  width: min(90vw, 80vh);
+  height: min(90vw, 80vh);
   max-width: 800px;
-  aspect-ratio: 1/1;
   animation: beat 1.5s ease-in-out infinite;
 }
 
@@ -28,8 +34,8 @@
   50% { transform: scale(1.08); }
 }
 
-/* 3) The SVG heart background occupies the entire container.
-   (Fill is transparent so that the background image is visible.)
+/* 3) SVG heart background:
+   - Fills the entire #heart container.
 */
 .heart-svg {
   position: absolute;
@@ -41,9 +47,9 @@
 }
 
 /* 4) Photo container:
-   - Fills the heart container.
-   - Uses the same clipPath so that its content is clipped to the heart shape.
-   - Now has a background image that covers the entire container.
+   - Absolutely fills #heart.
+   - Clipped with the same clipPath.
+   - Has a background image set to the current photo to fill gaps.
 */
 .photo-container {
   position: absolute;
@@ -58,13 +64,13 @@
   justify-content: center;
   align-items: center;
   pointer-events: none;
-
+  
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-/* 5) Loading message: centered while the image loads */
+/* 5) Loading message: centered until the image loads */
 .loading-message {
   position: absolute;
   z-index: 3;
@@ -80,8 +86,8 @@
 }
 
 /* 6) Photo item:
-   - Fills nearly the entire container with a 5px margin for a visible border.
-   - Animates in with a dropIn effect.
+   - Fills nearly the entire container with a 5px margin (visible red border).
+   - Uses a dropIn animation.
 */
 .photo-item {
   width: calc(100% - 10px);
@@ -109,7 +115,7 @@
 
 /* 7) The actual image:
    - Uses object-fit: contain so the entire image is visible.
-   - With the container background (using cover), the heart is fully filled.
+   - The background layer in .photo-container ensures full coverage.
 */
 .photo-item img {
   width: 100%;
@@ -122,7 +128,7 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Hover effect on desktop */
+/* Hover effect (desktop) */
 .photo-item:hover img {
   transform: scale(1.15);
   z-index: 3;
@@ -130,11 +136,12 @@
 }
 
 /* 8) Responsive tweaks for smaller screens:
-   - On screens 500px wide or less, reduce the header height to 60vh.
+   - For screens 500px wide or less, set the header height to 60vh with reduced bottom margin.
 */
 @media (max-width: 500px) {
   .header {
     height: 60vh;
+    margin: 0 0 2vh 0;
     align-items: flex-start;
     padding-top: 10px;
   }
