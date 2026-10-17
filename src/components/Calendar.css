@@ -86,3 +86,12 @@
     }
   }
   
+@media (max-width: 500px) {
+  .calendar-container { padding: 24px 12px; margin: 12px 0; }
+  .calendar-container h2 { font-size: 1.6rem; }
+  .timeline { padding-left: 0; }
+  .timeline::before { left: 19px; width: 3px; }
+  .timeline-icon { width: 38px; height: 38px; line-height: 38px; font-size: 1.15rem; }
+  .timeline-content { margin-left: 50px; padding: 8px 12px; overflow-wrap: anywhere; }
+  .timeline-content h3 { font-size: 1.05rem; }
+}

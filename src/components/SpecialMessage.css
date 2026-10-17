@@ -21,3 +21,8 @@
     margin: 0 auto;
   }
   
+@media (max-width: 500px) {
+  .special-message { margin: 12px 0; padding: 28px 16px; }
+  .special-message h2 { font-size: 1.6rem; }
+  .special-message p { font-size: 1rem; overflow-wrap: anywhere; }
+}

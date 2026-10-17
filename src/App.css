@@ -5,6 +5,10 @@
   text-align: center;
 }
 
+@media (max-width: 600px) {
+  #root { padding: 0.75rem; }
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -33,9 +37,6 @@
   }
 }
 
-.card {
-  padding: 2em;
-}
 
 .read-the-docs {
   color: #888;
@@ -45,3 +46,5 @@
 html, body {
   overflow-x: hidden;
 }
+
+img { max-width: 100%; }

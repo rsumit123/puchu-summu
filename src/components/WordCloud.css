@@ -15,3 +15,7 @@
     gap: 10px;
   }
   
+  @media (max-width: 500px) {
+    .word-cloud { padding: 28px 8px; }
+    .word-cloud-container { gap: 6px 8px; }
+  }

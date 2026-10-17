@@ -1,4 +1,8 @@
 .admin {
+  color-scheme: light;
+  background: #fff;
+  min-height: 100vh;
+  min-height: 100dvh;
   --pink: #e0457b;
   --pink-soft: #fff0f0;
   --line: #e7d5d9;
@@ -40,7 +44,7 @@
 .row .count { width: 96px; }
 @media (max-width: 520px) { .row { flex-wrap: wrap; } .row .grow { flex-basis: 100%; order: 3; } }
 
-.card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 14px; margin-bottom: 14px; }
+.admin .card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 14px; margin-bottom: 14px; }
 .trip { display: flex; gap: 14px; }
 .trip img, .no-photo { width: 120px; height: 120px; object-fit: cover; border-radius: 8px; flex-shrink: 0; background: var(--pink-soft); }
 .no-photo { display: grid; place-items: center; font-size: 0.8rem; color: #7a6a6e; text-align: center; }
@@ -63,4 +67,18 @@
 }
 .savebar .hint, .savebar .banner { margin: 0; }
 
-.login { max-width: 320px; margin: 18vh auto 0; display: flex; flex-direction: column; gap: 12px; }
+.admin .login { max-width: 320px; margin: 18vh auto 0; display: flex; flex-direction: column; gap: 12px; }
+
+/* page background must be light too, or dark-mode phones show dark text on dark */
+body:has(.admin) { background: #fff; }
+.admin button, .admin input, .admin textarea { font-size: 16px; } /* stops iOS zoom-on-focus */
+.admin .btn { min-height: 40px; }
+@media (max-width: 520px) {
+  .admin { padding: 12px 12px 96px; }
+  .bar-actions { width: 100%; }
+  .bar-actions .btn { flex: 1; text-align: center; }
+  .savebar { padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); }
+  .savebar .btn { min-width: 96px; }
+  .row .count { width: 80px; }
+  .row .emoji { width: 56px; }
+}
