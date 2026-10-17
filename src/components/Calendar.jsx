@@ -1,5 +1,5 @@
 import React from 'react';
-import dates from '../data/dates.json';
+import { useContent } from '../content/useContent';
 import './Calendar.css';
 
 // Map each event to a custom icon.
@@ -21,6 +21,7 @@ const getIcon = (event) => {
 };
 
 const Calendar = () => {
+  const { dates } = useContent();
   return (
     <div className="calendar-container">
       <h2>Our Special Dates</h2>
@@ -31,7 +32,7 @@ const Calendar = () => {
             className="timeline-item"
             style={{ animationDelay: `${index * 0.2}s` }}
           >
-            <div className="timeline-icon">{getIcon(item.event)}</div>
+            <div className="timeline-icon">{item.emoji || getIcon(item.event)}</div>
             <div className="timeline-content">
               <h3>
                 {new Date(item.date).toLocaleDateString('en-US', {

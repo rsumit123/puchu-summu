@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useContent } from '../content/useContent';
+import defaults from '../data/defaultContent';
 import './PhotoGallery.css';
 
 const PhotoGallery = () => {
-  const pool = [
-    '/images/puju_test_1.jpg',
-    '/images/puju10.jpg',
-    '/images/puju8.jpg',
-    // '/images/puju4.jpg',
-    // '/images/puju5.jpg',
-    // '/images/puju6.jpg',
-    '/images/photo7.jpg',
-    // '/images/photo8.jpg'
-  ];
+  const { gallery } = useContent();
+  // An emptied gallery falls back to the built-in photos rather than a blank heart.
+  const pool = gallery.length ? gallery : defaults.gallery;
 
   // Utility to pick a new photo that's not the current one.
   function getRandomPhoto(current) {
@@ -37,7 +32,7 @@ const PhotoGallery = () => {
       setPhotoKey(Date.now()); // triggers dropIn animation and resets loaded state
     }, 5000);
     return () => clearInterval(interval);
-  }, [photo]);
+  }, [photo, pool]);
 
   return (
     <header className="header">

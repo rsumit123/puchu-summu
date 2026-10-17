@@ -1,12 +1,13 @@
 import React from 'react';
-import words from '../data/wordcloud.json';
+import { useContent } from '../content/useContent';
 import './WordCloud.css';
 
 const WordCloud = () => {
+  const { words } = useContent();
   // Determine the min and max count values from the data
   const counts = words.map(word => word.count);
-  const minCount = Math.min(...counts);
-  const maxCount = Math.max(...counts);
+  const minCount = counts.length ? Math.min(...counts) : 0;
+  const maxCount = counts.length ? Math.max(...counts) : 0;
 
   // Function to calculate font size based on count (frequency)
   const getFontSize = (count) => {
